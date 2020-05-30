@@ -77,3 +77,32 @@ func TestSplitIntegerInTwo(t *testing.T) {
 		})
 	}
 }
+
+func TestRecursiveProduct(t *testing.T) {
+	cases := []struct {
+		name   string
+		inputX int64
+		inputY int64
+		output int64
+	}{
+		{
+			name:   "should return 144",
+			inputX: 12,
+			inputY: 12,
+			output: 144,
+		},
+		{
+			name:   "should return 99980001",
+			inputX: 9999,
+			inputY: 9999,
+			output: 99980001,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			o := recursiveProduct(c.inputX, c.inputY)
+			assert.Equal(t, c.output, o)
+		})
+	}
+}
