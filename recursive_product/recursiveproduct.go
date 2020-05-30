@@ -19,7 +19,7 @@ func countDigits(x int64) int {
 	return cnt
 }
 
-func divideIntegerInTwo(x int64) (a, b int64) {
+func splitIntegerInTwo(x int64) (a, b int64) {
 	n := countDigits(x)
 
 	firstHalf := x / int64(math.Pow10(n/2))

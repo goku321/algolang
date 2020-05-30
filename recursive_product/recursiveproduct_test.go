@@ -42,7 +42,7 @@ func TestCountDigits(t *testing.T) {
 	}
 }
 
-func TestDivideIntegerInTwo(t *testing.T) {
+func TestSplitIntegerInTwo(t *testing.T) {
 	cases := []struct {
 		name    string
 		input   int64
@@ -71,7 +71,7 @@ func TestDivideIntegerInTwo(t *testing.T) {
 
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			x, y := divideIntegerInTwo(c.input)
+			x, y := splitIntegerInTwo(c.input)
 			assert.Equal(t, c.outputX, x)
 			assert.Equal(t, c.outputY, y)
 		})
