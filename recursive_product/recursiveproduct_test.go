@@ -78,6 +78,47 @@ func TestSplitIntegerInTwo(t *testing.T) {
 	}
 }
 
+func TestMakeStringsEqualInLength(t *testing.T) {
+	cases := []struct {
+		name    string
+		inputX  string
+		inputY  string
+		outputX string
+		outputY string
+	}{
+		{
+			name:    "should return 789 and 001",
+			inputX:  "789",
+			inputY:  "1",
+			outputX: "789",
+			outputY: "001",
+		},
+		{
+			name:    "should return 0009 and 1234",
+			inputX:  "9",
+			inputY:  "1234",
+			outputX: "0009",
+			outputY: "1234",
+		},
+		{
+			name:    "should return 1234 and 5678",
+			inputX:  "1234",
+			inputY:  "5678",
+			outputX: "1234",
+			outputY: "5678",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			x, y := makeStringsEqualInLength(c.inputX, c.inputY)
+			assert.Equal(t, len(x), len(y))
+			assert.Equal(t, c.outputX, x)
+			assert.Equal(t, c.outputY, y)
+		})
+	}
+}
+
 func TestRecursiveProduct(t *testing.T) {
 	cases := []struct {
 		name   string

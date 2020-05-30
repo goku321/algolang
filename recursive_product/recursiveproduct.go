@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 // Count number of digits in a positive integer.
 // Returns 1 for 0.
@@ -26,6 +29,21 @@ func splitIntegerInTwo(x int64) (a, b int64) {
 	secondHalf := x % int64(math.Pow10(n/2))
 
 	return firstHalf, secondHalf
+}
+
+func makeStringsEqualInLength(x, y string) (string, string) {
+	diff := len(x) - len(y)
+	if diff == 0 {
+		return x, y
+	}
+
+	if diff > 0 {
+		y = fmt.Sprintf("%0*s", len(x), y)
+		return x, y
+	}
+
+	x = fmt.Sprintf("%0*s", len(y), x)
+	return x, y
 }
 
 // Calculates product b/w x and y.
