@@ -53,6 +53,7 @@ func makeStringsEqualInLength(x, y string) (string, string) {
 // Adds two integers represented as strings.
 // Input strings must of same length.
 func addIntegerStrings(x, y string) string {
+	x, y = makeStringsEqualInLength(x, y)
 	strLen := len(x)
 	resStr := ""
 	c := 0
@@ -98,4 +99,46 @@ func recursiveProduct(x, y int64) int64 {
 	product3 := recursiveProduct(b, d)
 
 	return product1 + product2 + product3
+}
+
+func appendZeroesToString(x string, n int) string {
+	res := x
+	for n > 0 {
+		res += "0"
+		n--
+	}
+	return res
+}
+
+// Calculates product b/w x and y.
+// x and y are strings to allow inputs that won't
+// fit in 64-bit.
+// x and y have even and equal number of digits.
+func recursiveProductWithStringInput(x, y string) string {
+	n := len(x)
+	if n == 1 {
+		a, err := strconv.Atoi(x)
+		if err != nil {
+			log.Println(err)
+		}
+
+		b, err := strconv.Atoi(y)
+		if err != nil {
+			log.Println(err)
+		}
+
+		return strconv.Itoa(a * b)
+	}
+
+	a, b := x[0:n/2], x[n/2:n]
+	c, d := y[0:n/2], y[n/2:n]
+
+	p1 := recursiveProductWithStringInput(a, c)
+	p2 := addIntegerStrings(recursiveProductWithStringInput(a, d), recursiveProductWithStringInput(b, c))
+	p3 := recursiveProductWithStringInput(b, d)
+
+	p1 = appendZeroesToString(p1, n)
+	p2 = appendZeroesToString(p2, n/2)
+
+	return addIntegerStrings(addIntegerStrings(p1, p2), p3)
 }
