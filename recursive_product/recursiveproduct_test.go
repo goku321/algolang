@@ -119,6 +119,41 @@ func TestMakeStringsEqualInLength(t *testing.T) {
 	}
 }
 
+func TestAddIntegerStrings(t *testing.T) {
+	cases := []struct {
+		name   string
+		inputX string
+		inputY string
+		output string
+	}{
+		{
+			name:   "should return 24",
+			inputX: "12",
+			inputY: "12",
+			output: "24",
+		},
+		{
+			name:   "should return 0",
+			inputX: "0",
+			inputY: "0",
+			output: "0",
+		},
+		{
+			name:   "should return 199999999999999999998",
+			inputX: "99999999999999999999",
+			inputY: "99999999999999999999",
+			output: "199999999999999999998",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			o := addIntegerStrings(c.inputX, c.inputY)
+			assert.Equal(t, c.output, o)
+		})
+	}
+}
+
 func TestRecursiveProduct(t *testing.T) {
 	cases := []struct {
 		name   string
