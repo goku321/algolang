@@ -154,6 +154,41 @@ func TestAddIntegerStrings(t *testing.T) {
 	}
 }
 
+func TestAppendZeroesToString(t *testing.T) {
+	cases := []struct {
+		name        string
+		inputString string
+		inputNumber int
+		output      string
+	}{
+		{
+			name:        "should return 4230000",
+			inputString: "423",
+			inputNumber: 4,
+			output:      "4230000",
+		},
+		{
+			name:        "should return 4230",
+			inputString: "423",
+			inputNumber: 1,
+			output:      "4230",
+		},
+		{
+			name:        "should return 423",
+			inputString: "423",
+			inputNumber: 0,
+			output:      "423",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			o := appendZeroesToString(c.inputString, c.inputNumber)
+			assert.Equal(t, c.output, o)
+		})
+	}
+}
+
 func TestRecursiveProduct(t *testing.T) {
 	cases := []struct {
 		name   string
