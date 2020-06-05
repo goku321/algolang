@@ -6,6 +6,7 @@ func mergeAndCountInversions(x []int, y []int) ([]int, int) {
 	lenY := len(y)
 
 	c := make([]int, lenX+lenY)
+	inversions := 0
 	i, j := 0, 0
 
 	for k := range c {
@@ -14,6 +15,7 @@ func mergeAndCountInversions(x []int, y []int) ([]int, int) {
 			i++
 		} else if i < lenX && j < lenY {
 			c[k] = y[j]
+			inversions += lenX - i
 			j++
 		} else if i < lenX {
 			c[k] = x[i]
@@ -24,5 +26,5 @@ func mergeAndCountInversions(x []int, y []int) ([]int, int) {
 		}
 	}
 
-	return c, 0
+	return c, inversions
 }
