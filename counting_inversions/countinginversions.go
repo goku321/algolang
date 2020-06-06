@@ -1,5 +1,12 @@
 package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // merges two sorted slices and count inversions.
 func mergeAndCountInversions(x []int, y []int) ([]int, int) {
 	lenX := len(x)
@@ -41,4 +48,34 @@ func countInversions(x []int) ([]int, int) {
 	mergedSlice, splitCount := mergeAndCountInversions(sortedLeft, sortedRight)
 
 	return mergedSlice, (leftCount + rightCount + splitCount)
+}
+
+func readInputFromFile(name string) ([]int, error) {
+	f, err := os.Open(name)
+	if err != nil {
+		return nil, err
+	}
+
+	input := []int{}
+
+	r := bufio.NewScanner(f)
+	for r.Scan() {
+		num, err := strconv.Atoi(r.Text())
+		if err != nil {
+			return nil, err
+		}
+		input = append(input, num)
+	}
+
+	return input, nil
+}
+
+func main() {
+	input, err := readInputFromFile("algo.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	_, count := countInversions(input)
+	fmt.Printf("Total number of inversions in the given input is %d\n", count)
 }
