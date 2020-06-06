@@ -28,3 +28,17 @@ func mergeAndCountInversions(x []int, y []int) ([]int, int) {
 
 	return c, inversions
 }
+
+func countInversions(x []int) ([]int, int) {
+	lenX := len(x)
+	if lenX == 1 {
+		return x, 0
+	}
+
+	mid := lenX / 2
+	sortedLeft, leftCount := countInversions(x[0:mid])
+	sortedRight, rightCount := countInversions(x[mid:lenX])
+	mergedSlice, splitCount := mergeAndCountInversions(sortedLeft, sortedRight)
+
+	return mergedSlice, (leftCount + rightCount + splitCount)
+}
