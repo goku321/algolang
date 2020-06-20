@@ -10,7 +10,7 @@ func partition(x []int) int {
 
 	pivot := x[0]
 	i := 1
-	
+
 	for j := i; j < len(x); j++ {
 		if x[j] < pivot {
 			temp := x[j]
@@ -24,6 +24,6 @@ func partition(x []int) int {
 	temp := x[i-1]
 	x[i-1] = pivot
 	x[0] = temp
-	
-	return i-1
+
+	return i - 1
 }
