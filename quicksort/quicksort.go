@@ -27,3 +27,13 @@ func partition(x []int) int {
 
 	return i - 1
 }
+
+// sorts x.
+func quicksort(x []int) {
+	lenX := len(x)
+	if lenX > 1 {
+		partitionIndex := partition(x)
+		quicksort(x[:(partitionIndex + 1)])
+		quicksort(x[partitionIndex+1:])
+	}
+}
